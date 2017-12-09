@@ -1,7 +1,11 @@
 from django.conf.urls import url
-from . views import BlogDetailView, BlogListView
+from django.urls import path
+from . views import BlogDetailView, BlogListView, BlogCreateView, BlogUpdateView, BlogDeleteView
 
 urlpatterns = [
-    url(r'^$', BlogListView.as_view(), name='post_list'),
-    url(r'^post/(?P<pk>\d+)/$', BlogDetailView.as_view(), name='post_detail'),
+    path('', BlogListView.as_view(), name='post_list'),
+    path('post/<int:pk>/', BlogDetailView.as_view(), name='post_detail'),
+    path('post/new/', BlogCreateView.as_view(), name="post_new"),
+    path('post/<int:pk>/edit/', BlogUpdateView.as_view(), name="post_edit"),
+    path('post/<int:pk>/delete/', BlogDeleteView.as_view(), name="post_delete"),
 ]
